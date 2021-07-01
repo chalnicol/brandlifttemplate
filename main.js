@@ -2,7 +2,7 @@
 var clickTag = 'www.google.com';
 
 //format 1 = big box; 2 = Interstitial Responsive; 3 = click-to-expand; 
-var format = 2; 
+var format = 1; 
 
 //select theme 1 - 3
 var theme = 2;
@@ -155,7 +155,7 @@ function initAd () {
 
             document.querySelector('.universal-cont').style.display = 'block';
 
-            document.querySelector('.bg').classList.add ('bg-' + theme);
+            document.querySelector('.bg').classList.add ('bg-bb-' + theme);
 
             initQuestions ( questions[ currQuestionIndex ] );
 
