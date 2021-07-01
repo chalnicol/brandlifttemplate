@@ -5,21 +5,26 @@
 }
 
 html,body { 
+    width: 100%;
     height : 100vh;
 }
 
-.main{
+
+.main {
     width: 100%;
-    height : 100%;
+    height: 100%;
     display: flex;
 }
 
 .container {
-    position: relative;
-    margin : auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    display: none;
+    margin: auto;
+    font-family: Verdana, Tahoma, sans-serif;
+    font-weight: bold;
     overflow: hidden;
     background-color: #f4f4f4;
+    position:relative;
 }
 
 .container * {
@@ -35,15 +40,20 @@ html,body {
 .border {
     width: 100%;
     height: 100%;
-    border : 1px solid #3a3a3a;
+    border : 1px solid #9e9e9e;
     pointer-events: none;
 }
 
-#col-cont {
+.col-cont {
     display: none;
+    width: 100%;
+    height: 100%;
+    top : 0;
+    left : 0;
 }
 
 .universal-cont {
+    display: none;
     width: 100%;
     height: 100%;
     background-color: white;
@@ -54,6 +64,7 @@ html,body {
     width: 100%;
     height : 100%;
     max-width: 1200px;
+    color : white;
 } 
 
 .question-cont {
@@ -62,15 +73,20 @@ html,body {
 }
 
 .question-div {
-    padding: 10px;
-    width : 100%;
+    width: 80%;
+    height : 20%;
+    top : 10%;
+    left : 0;
+    right : 0;
+    margin: 0 auto;
+    /* background-color: aqua; */
 }
 .options-div {
     top : 25%;
     width : 100%;
     margin: 0 auto;
     height : 50%;
-    background-color: #cecece;
+    /* background-color: #cecece; */
 }
 
 .options-div ul {
@@ -87,7 +103,7 @@ html,body {
     border: 1px solid #ccc;
     padding: 10px;
     list-style-type: none;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
 }
 
 .w-50 {
@@ -107,31 +123,28 @@ html,body {
 
 
 .btn-div {
-    height : 20%;
-    width: 100%;
-    bottom: 0;
-    background-color: red;
-    text-align: center;
+    height : 8.5%;
+    width: 47.9%;
+    left : 0;
+    right : 0;
+    margin : 0 auto;
+
+    bottom : 12%;
 }
 
-.btn-div button {
-
-    border : 1px solid #7c7777;
-    width : 50%;
-    height : 80%;
-    /* max-width: 450px;
-    max-height : 50px; */
-    border-radius: 30px;
-    font-size: 1.2rem;
-    position: relative !important;
-
-    /* transition: all 0.3s ease-in-out ; */
-    /* font-weight: 500; */
+.btn-submit-1 {
+    background: url('images/submit.png') center center no-repeat;
+    background-size: contain;
+}
+.btn-submit-2 {
+    background: url('images/submit2.png') center center no-repeat;
+    background-size: contain;
+}
+.btn-submit-3 {
+    background: url('images/submit3.png') center center no-repeat;
+    background-size: contain;
 }
 
-.btn-div button:hover {
-    background-color: #dedede;
-}
 
 #end {
     display: none;
@@ -153,14 +166,93 @@ html,body {
     position: absolute;
 }
 
-
 .pbar-cont {
-    width : 50%;
-    height : 15px;
+    margin: auto;
+    width : 30%;
+    max-width: 180px;
+    height : 5px;
+    border-radius: 5px;
     background-color: #ccc;
+    overflow: hidden;
 }
 .pbar {
     width: 5%;
     height : 100%;
     background-color:blueviolet ;
+}
+
+.bg-col {
+    width: 100%;
+    height : 100%;
+}
+.txt-col {
+
+    width: 62%;   
+    height : 70%;
+    top : 0;
+    bottom : 0;
+    margin: auto 0;
+    padding : 0 10px;
+    line-height: 17px;
+    color : white;
+    font-size: 13px;
+}
+
+.cte {
+    width: 100%;
+    height : 100%;
+}
+
+.cte-1 {
+    background: url('images/cte.png') center center no-repeat;
+    background-size: contain;
+}
+.cte-2 {
+    background: url('images/cte2.png') center center no-repeat;
+    background-size: contain;
+}
+.cte-3 {
+    background: url('images/cte3.png') center center no-repeat;
+    background-size: contain;
+}
+
+.bg-col-1 {
+    background: url('images/bg-col.png') center center no-repeat;
+    background-size: contain;
+}
+.bg-col-2 {
+    background: url('images/bg-col2.png') center center no-repeat;
+    background-size: contain;
+}
+.bg-col-3 {
+    background: url('images/bg-col3.png') center center no-repeat;
+    background-size: contain;
+}
+
+.bg-1 {
+    background: url('images/bg.png') center center no-repeat;
+    background-size: contain;
+}
+.bg-2 {
+    background: url('images/bg2.png') center center no-repeat;
+    background-size: contain;
+}
+.bg-3 {
+    background: url('images/bg3.png') center center no-repeat;
+    background-size: contain;
+}
+
+.close-btn {
+    top :  1%;
+    right : 2.2%;
+    width:  4.5%;
+    height : 4%;
+    background: url('images/close.png') center center no-repeat;
+    background-size: contain;
+    display: none;
+}
+
+.bg {
+    width: 100%;
+    height : 100%
 }

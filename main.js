@@ -1,6 +1,9 @@
 
 var clickTag = 'www.google.com';
 
+//format 1 = big box; 2 = cte; 3 = Interstitial Responsive;
+var format = 2; 
+
 //select themes 1 - 3
 var themes = 0;
 
@@ -11,16 +14,18 @@ var imageAnswers = false;
 var multiselect = false;
 
 //true if with submit button; false if auto submit..
-var withButton = false; 
+var withButton = true; 
 
-//format 1 = big box; 2 = cte; 3 = Interstitial Responsive;
-var format = 3; 
+
 
 //if to add none of the above in multiselect feature only;
 var noneoftheaboveoption = true;
 
 //set options style 0 = grid; 1 = vertical aligned;
 var optionsStyle = 0;
+
+//set banner text if creative is expandable..
+var bannerText = "Which brands are you familiar with?"
 
 //set questions 
 var questions = [
@@ -40,11 +45,18 @@ var questions = [
 var googleAppURL = 'https://script.google.com/macros/s/AKfycbxe5H2V6o6sTOMcFGYIMMNOidMGUcsTDlaloAQrYy6c2yhaJLn247PPpeFekYk-Zm7A/exec';
 
 
+
+
 //
 var responseData = [];
 
 //
 var currQuestionIndex = 0;
+
+//
+var expandedState = false;
+
+
 
 // window.onload = initAd;
 window.onload = preloadImages;
@@ -69,6 +81,8 @@ function preloadImages (){
 
             perc = imageLoaded/manifest.length * 100;
 
+            document.querySelector('.pbar').style.width = perc +"%";
+
             if ( perc >= 100 ) initAd();
         }
 
@@ -78,9 +92,12 @@ function preloadImages (){
 
 function resize () {
 
-    if ( format == 1 ) return;
+    if ( format == 1 || ( format == 2 && !expandedState )) return;
 
-    var maxW = 667, maxH = 1000;
+    console.log ('this is called wewewe');
+
+    //set max width and height of the creative..
+    var maxW = 667, maxH = 1001;
 
     var w = document.body.clientWidth,
     
@@ -118,30 +135,88 @@ function resize () {
 
     document.querySelector(".container").style.height = fh +"px";
 
-
+    //font adjustments 
+    document.querySelector('.questions').style.fontSize = Math.floor(fh * 0.03 ) + 'px'
 }
 
 function initAd () {
 
-    console.log ('ad inited');
-
+    //hide progress bar..
+    document.querySelector('.pbar-cont').style.display = 'none';
+    
+    //show container
+    document.querySelector('.container').style.display = 'block';
+    
     setContainerSize ();
 
-    resize();
-
     if ( format !== 2 ) {
+
+        if ( format == 3 ) resize();
+
+        document.querySelector('.universal-cont').style.display = 'block';
+
         initQuestions ( questions[ currQuestionIndex ] );
+
     }else {
-        showCollapsed ();
+
+        showInitialCollapsedState ();
     }
 
 }
 
-function showCollapsedState () {
+function showInitialCollapsedState () {
     
+    document.querySelector('.col-cont').style.display = 'block';
+
+    document.querySelector('.bg-col').classList.add ('bg-col-1');
+
+    document.querySelector('.txt-col').innerText = bannerText;
+
+    var cte = document.querySelector('.cte');
+    
+    cte.classList.add ('cte-1');
+
+    cte.addEventListener('click', function () {
+        console.log ('expand');
+        showExpandState();
+    });
+
 }
 
-function showExpandState () {
+function showExpandState ( responsive = false ) {
+
+    expandedState = true;
+
+    document.querySelector('.container').style.width = '100%'; //responsive ? '100%' : '320px';
+    document.querySelector('.container').style.height = '100%'; //responsive ? '100%' : '480px';
+
+    resize();
+
+    document.querySelector('.universal-cont').style.display = 'block';
+
+    document.querySelector('.bg').classList.add ('bg-1');
+    
+
+
+    addCloseBtn ();
+
+    initQuestions ( questions[ currQuestionIndex ] );
+
+
+}
+
+function addCloseBtn () {
+
+    var closeBtn = document.querySelector('.close-btn');
+
+    closeBtn.style.display = 'block';
+
+    closeBtn.addEventListener ('click', collapseAd );
+
+
+}
+
+function collapseAd () {
 
 }
 
@@ -168,6 +243,7 @@ function setContainerSize () {
 
 function initQuestions ( obj, index = 0 ) 
 {
+    console.log ('questions inited')
 
     //create question main container
     var questCont = document.createElement('div');
@@ -247,17 +323,20 @@ function initQuestions ( obj, index = 0 )
 
         //create btn div
         var btnDiv = document.createElement('div');
-        btnDiv.classList.add ('btn-div')
-
-        //create button element
-        var btn = document.createElement('button');
-        btn.innerText = 'Submit';
-
-        btn.addEventListener ('click', function () {
+        btnDiv.classList.add ('btn-div');
+        btnDiv.classList.add ('btn-submit-1');
+        
+        btnDiv.addEventListener ('click', function () {
             submitAnswer ();
         });
+
+        //create button element
+        // var btn = document.createElement('button');
+        // btn.innerText = 'Submit';
+
+        // 
         
-        btnDiv.append ( btn );
+        // btnDiv.append ( btn );
 
         questCont.append ( btnDiv );
 
@@ -358,7 +437,6 @@ function submitToGoogle () {
 
     // define what happens on successful form data submission
     http.addEventListener('load', function (evt) {
-        // call 'c' because the action is considered "completed".
         console.log(evt);
     });
     
