@@ -1,11 +1,11 @@
 
 var clickTag = 'www.google.com';
 
-//format 1 = big box; 2 = cte; 3 = Interstitial Responsive;
+//format 1 = big box; 2 = Interstitial Responsive; 3 = click-to-expand; 
 var format = 2; 
 
-//select themes 1 - 3
-var themes = 0;
+//select theme 1 - 3
+var theme = 2;
 
 //image options 
 var imageAnswers = false;
@@ -16,16 +16,14 @@ var multiselect = false;
 //true if with submit button; false if auto submit..
 var withButton = true; 
 
-
-
-//if to add none of the above in multiselect feature only;
+//set true to add none of the above option ( multiselect );
 var noneoftheaboveoption = true;
 
 //set options style 0 = grid; 1 = vertical aligned;
-var optionsStyle = 0;
+var optionsStyle = 1;
 
 //set banner text if creative is expandable..
-var bannerText = "Which brands are you familiar with?"
+var bannerText = "Which brands are you familiar with?";
 
 //set questions 
 var questions = [
@@ -44,8 +42,14 @@ var questions = [
 // set "current web app" URL after the deploy
 var googleAppURL = 'https://script.google.com/macros/s/AKfycbxe5H2V6o6sTOMcFGYIMMNOidMGUcsTDlaloAQrYy6c2yhaJLn247PPpeFekYk-Zm7A/exec';
 
+//set max width when resized..
+var maxW = 667;
 
+//set max height when resized..
+var maxH = 1001;
 
+//set end image to show : 1-2
+var endImage = 1;
 
 //
 var responseData = [];
@@ -61,7 +65,6 @@ var expandedState = false;
 // window.onload = initAd;
 window.onload = preloadImages;
 
-window.onresize = resize;
 
 function preloadImages (){
 
@@ -92,12 +95,8 @@ function preloadImages (){
 
 function resize () {
 
-    if ( format == 1 || ( format == 2 && !expandedState )) return;
-
-    console.log ('this is called wewewe');
-
-    //set max width and height of the creative..
-    var maxW = 667, maxH = 1001;
+   
+    console.log ('resize container..');
 
     var w = document.body.clientWidth,
     
@@ -149,41 +148,76 @@ function initAd () {
     
     setContainerSize ();
 
-    if ( format !== 2 ) {
+   
+    switch ( format ) {
 
-        if ( format == 3 ) resize();
+        case 1:
 
-        document.querySelector('.universal-cont').style.display = 'block';
+            document.querySelector('.universal-cont').style.display = 'block';
 
-        initQuestions ( questions[ currQuestionIndex ] );
+            document.querySelector('.bg').classList.add ('bg-' + theme);
 
-    }else {
+            initQuestions ( questions[ currQuestionIndex ] );
 
-        showInitialCollapsedState ();
+            break;
+        case 2:
+
+            resize();
+
+            document.querySelector('.universal-cont').style.display = 'block';
+
+            document.querySelector('.bg').classList.add ('bg-' + theme);
+    
+            addCloseBtn ();
+
+            enableResponsive ();
+
+            initQuestions ( questions[ currQuestionIndex ] );
+
+            break;
+        case 3:
+
+            
+
+            showCollapse();
+
+            break;
+                    
     }
 
 }
 
-function showInitialCollapsedState () {
+
+
+function enableResponsive ( enabled = true ) {
+
+    if ( enabled ) {
+        window.addEventListener ('resize', resize );
+    }else {
+        window.removeEventListener ('resize', resize );
+    }
+}
+
+
+function showCollapse () {
     
     document.querySelector('.col-cont').style.display = 'block';
 
-    document.querySelector('.bg-col').classList.add ('bg-col-1');
+    document.querySelector('.bg-col').classList.add ('bg-col-' + theme );
 
     document.querySelector('.txt-col').innerText = bannerText;
 
     var cte = document.querySelector('.cte');
     
-    cte.classList.add ('cte-1');
+    cte.classList.add ('cte-' + theme );
 
     cte.addEventListener('click', function () {
-        console.log ('expand');
-        showExpandState();
+        expandAd();
     });
 
 }
 
-function showExpandState ( responsive = false ) {
+function expandAd ( responsive = false ) {
 
     expandedState = true;
 
@@ -192,17 +226,33 @@ function showExpandState ( responsive = false ) {
 
     resize();
 
+    enableResponsive ();
+
     document.querySelector('.universal-cont').style.display = 'block';
 
-    document.querySelector('.bg').classList.add ('bg-1');
+    document.querySelector('.bg').classList.add ('bg-' + theme);
     
-
-
     addCloseBtn ();
 
     initQuestions ( questions[ currQuestionIndex ] );
 
+}
 
+function collapseAd () {
+
+    expandedState = false;
+
+    document.querySelector('.container').style.width = '320px'
+    document.querySelector('.container').style.height = '50px';
+
+    document.querySelector('.universal-cont').style.display = 'none';
+
+    enableResponsive ( false );
+}
+
+function closeInterstitial () {
+    console.log ('close');
+    document.querySelector('.main').style.display = 'none';
 }
 
 function addCloseBtn () {
@@ -211,12 +261,8 @@ function addCloseBtn () {
 
     closeBtn.style.display = 'block';
 
-    closeBtn.addEventListener ('click', collapseAd );
+    closeBtn.addEventListener ('click', format == 2 ? closeInterstitial : collapseAd );
 
-
-}
-
-function collapseAd () {
 
 }
 
@@ -229,14 +275,14 @@ function setContainerSize () {
             w = '300px'; h = '250px';
             break;
         case 2 : 
-            w = '320px'; h = '50px';
-            break;
-
-        default : 
             w = '100%'; h = '100%';
+            break;
+        default : 
+            w = '320px'; h = '50px';
     }
 
     document.querySelector('.container').style.width = w;
+    
     document.querySelector('.container').style.height = h;
     
 }
@@ -264,7 +310,7 @@ function initQuestions ( obj, index = 0 )
     optionsList.dataset.qindex = index;
 
 
-    var optionsClass = optionsStyle == 0 ? 'w-50' : 'w-100';
+    var optionsClass = optionsStyle == 0 ? 'g-align' : 'v-align';
 
     for ( var i in obj.options ) {
 
@@ -324,7 +370,7 @@ function initQuestions ( obj, index = 0 )
         //create btn div
         var btnDiv = document.createElement('div');
         btnDiv.classList.add ('btn-div');
-        btnDiv.classList.add ('btn-submit-1');
+        btnDiv.classList.add ('btn-submit-' + theme);
         
         btnDiv.addEventListener ('click', function () {
             submitAnswer ();
@@ -411,6 +457,8 @@ function submitAnswer () {
 }
 
 function showEndScreen () {
+
+    document.querySelector('.end-img').classList.add ('end-img-' + endImage );
 
     document.getElementById('end').style.display = 'block';
     
