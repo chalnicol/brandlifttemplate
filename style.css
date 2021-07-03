@@ -7,24 +7,29 @@
 html,body { 
     width: 100%;
     height : 100vh;
+    background-color: #dedede;
 }
 
 
-.main {
+.base {
     width: 100%;
-    height: 100%;
-    display: flex;
+    height : 100%;
+    background-color: white;
+    display:none;
 }
-
 .container {
 
-    display: none;
-    margin: auto;
-    font-family: Verdana, Tahoma, sans-serif;
+    position:absolute;
+    width: 100%;
+    height : 100%;
+
+    left : 50%;
+    transform : translateX(-50%);
+    font-family: Oswald, Verdana, Tahoma, sans-serif;
     font-weight: bold;
     overflow: hidden;
     background-color: #f4f4f4;
-    position:relative;
+    display: none;
     color : white;
 }
 
@@ -54,17 +59,23 @@ html,body {
 
 .col-cont {
     display: none;
-    width: 100%;
-    height: 100%;
+    width: 320px;
+    height: 50px;
     top : 0;
     left : 0;
+    overflow: hidden;
+
 }
 
 .universal-cont {
-    display: none;
+    /* display: none; */
     width: 100%;
     height: 100%;
-    background-color: white;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    /* background-color: white; */
 }
 
 
@@ -72,32 +83,64 @@ html,body {
     width: 100%;
     height : 100%;
     max-width: 1200px;
-    
+    user-select: none;
 } 
 
 .question-cont {
     width: 100%;
     height : 100%;
+    will-change: transform;
+    transition: all 0.6s ease-in-out;
 }
+
 
 .question-div {
     width: 80%;
-    height : 20%;
-    top : 14%;
     left : 0;
     right : 0;
     margin: 0 auto;
     /* background-color: aqua; */
 }
+
+.question-div-gen {
+    top : 14%;
+    height : 20%;
+}
+.question-div-bb {
+    height : 20%;
+    top : 9%;
+    font-size: 13px;
+    line-height: 17px;
+}
+
 .options-div {
-    top : 29%;
-    width : 90%;
+    width : 88%;
     right : 0;
     left : 0;
     margin: 0 auto;
-    height : 40%;
-    /* background-color: #cecece; */
 }
+
+.options-div-gen {
+    top : 28%;
+    height : 40%;
+}
+.options-div-bb {
+    top : 25%;
+    height : 50%;
+    font-size: 13px;
+}
+
+.options-div-gen-nsb {
+    top : 28%;
+    height : 50%;
+}
+.options-div-bb-nsb {
+    top : 30%;
+    height : 50%;
+    font-size: 13px;
+}
+
+
 
 .options-div ul {
     width: 100%;
@@ -111,13 +154,21 @@ html,body {
 .options-div ul li {
 
     position: relative !important;
-    /* border: 1px solid #ccc; */
-    padding: 10px;
     list-style-type: none;
-    
-    border : 1px solid #ccc;
     margin-bottom : 3px;
-    /* background-color: aliceblue; */
+    background-color: #ffffff22;
+    /* padding-left :5%; 
+    display: flex;
+    align-items: center;*/
+
+}
+
+.options-div ul li:active {
+
+
+    will-change: transform;
+    transform : scale(0.98);
+    transition : scale 0.3s ease-in-out;
 }
 
 .g-align {
@@ -132,19 +183,35 @@ html,body {
     background-color: rgba( 186, 255, 242, 0.4 );
 } */
 
-.active {
-    background-color: rgba(224, 255, 47, 0.6) !important;
+.selected {
+    background-color: #ffffff77 !important;
+    color : #303018;
 }
 
 
 .btn-div {
-    height : 8.5%;
-    width: 47.9%;
     left : 0;
     right : 0;
     margin : 0 auto;
+}
 
+.btn-div-gen {
+    height : 8.5%;
+    width: 47.9%;
     bottom : 15%;
+}
+
+.btn-div-bb {
+    height: 11.5%;
+    width: 38.9%;
+    bottom: 11%;
+}
+
+.btn-div:active {
+    
+    will-change: transform;
+    transform : scale(0.95);
+    transition : scale 0.3s ease-in-out;
 }
 
 .btn-submit-1 {
@@ -180,6 +247,15 @@ html,body {
     background-size: contain;
 }
 
+.end-img-bb-1 {
+    background: url('images/endscreen-bb.png') center center no-repeat;
+    background-size: contain;
+}
+.end-img-bb-2 {
+    background: url('images/endscreen2-bb.png') center center no-repeat;
+    background-size: contain;
+}
+
 .img-txt {
     width: 100%;
     height : 100%;
@@ -191,8 +267,27 @@ html,body {
     position: absolute;
 }
 
+.xy-center {
+    top : 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.x-center {
+    left: 50%;
+    transform: translateX(-50%);
+}
+.y-center {
+    top : 50%;
+    transform: translateY(-50%);
+}
+
+
+
 .pbar-cont {
-    margin: auto;
+    position: absolute;
+    top : 50%;
+    left : 50%;
+    transform: translateX(-50%);
     width : 30%;
     max-width: 180px;
     height : 5px;
@@ -203,7 +298,7 @@ html,body {
 .pbar {
     width: 5%;
     height : 100%;
-    background-color:blueviolet ;
+    background-color:rgb(79, 25, 129) ;
 }
 
 .bg-col {
@@ -295,4 +390,22 @@ html,body {
 .bg {
     width: 100%;
     height : 100%
+}
+
+.opt-cont {
+    width: 100%;
+    height : 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 5%;
+}
+.img-cont {
+    width: 100%;
+    height : 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img {
+    height : 90%;
 }

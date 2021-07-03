@@ -1,46 +1,254 @@
 
-var clickTag = 'www.google.com';
 
-//format 1 = big box; 2 = Interstitial Responsive; 3 = click-to-expand; 
-var format = 1; 
+//-----------------------------------------
+//------start of configuration-------------
+//-----------------------------------------
+
+//set format 1 = big box; 2 = Interstitial Responsive; 3 = click-to-expand; 
+var format = 2; 
+
+//set true or false if ad/expand is responsive ( not for big box ad )
+var isResponsive = false;
 
 //select theme 1 - 3
-var theme = 2;
+var theme = 3;
 
-//image options 
-var imageAnswers = false;
-
-//type 0 = select; 1 = multiselect
-var multiselect = false;
-
-//true if with submit button; false if auto submit..
-var withButton = true; 
-
-//set true to add none of the above option ( multiselect );
-var noneoftheaboveoption = true;
-
-//set options style 0 = grid; 1 = vertical aligned;
-var optionsStyle = 1;
-
-//set banner text if creative is expandable..
+//set banner text. for cte format only.. 
 var bannerText = "Which brands are you familiar with?";
 
-//set questions 
-var questions = [
+//set expand banner dimensions, for cte only and not responsive 
+var expandDimensions = { width : 340,  height : 480 }; 
 
+//set questions 
+var questionsData = [
+    
     {
-        question : 'How likely are you to get a shot of tequila in the morning?',
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : false, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 1 = grid style; 2 = vertical aligned..
+            optionsAlignment : 1,
+            //set true/false if questions are in random order..
+            randomOptions : true,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : false,
+            //set true if multiselct; false if single select
+            multiselect : false
+
+        },
+        question : 'This is with auto submit feature and random?', 
+
+        //set options or image urls here..
         options : [
-            'This is option 1 for q1',
-            'This is option 2 for q1',
-            'This is option 3 for q1',
-            'This is option 4 for q1',
+            'This is option 1',
+            'This is option 2',
+            'This is option 3',
+            'This is option 4'
         ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : false, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 1 = grid style; 2 = vertical aligned..
+            optionsAlignment : 1,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : false
+
+        },
+        question : 'This is with a submit button?', 
+
+        //set options or image urls here..
+        options : [
+            'This is option 1',
+            'This is option 2',
+            'This is option 3',
+            'This is option 4'
+        ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : false, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 1,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : true
+
+        },
+        question : 'This is multi-select with no \'none-of-the-above \' option?', 
+
+        //set options or image urls here..
+        options : [
+            'This is option 1',
+            'This is option 2',
+            'This is option 3',
+            'This is option 4'
+        ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : true, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 1,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : true
+
+        },
+        question : 'This is multi-select with \'none-of-the-above \' option?', 
+
+        //set options or image urls here..
+        options : [
+            'This is option 1',
+            'This is option 2',
+            'This is option 3',
+            'This is option 4'
+        ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : true, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 0,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : true
+
+        },
+        question : 'This is multi-select with \'none-of-the-above \' option but grid-aligned?', 
+
+        //set options or image urls here..
+        options : [
+            'This is option 1',
+            'This is option 2',
+            'This is option 3',
+            'This is option 4'
+        ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : false, 
+            // set true of false if options are images
+            imageOptions : true,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 0,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : false,
+            //set true if multiselct; false if single select
+            multiselect : false
+
+        },
+        question : 'This is single-select with image options and auto-submit?', 
+
+        //set options or image urls here..
+        options : [
+            'images/imageChoices/opt_img_1.png',
+            'images/imageChoices/opt_img_2.png',
+            'images/imageChoices/opt_img_3.png',
+            'images/imageChoices/opt_img_4.png',
+            // 'images/imageChoices/opt_img_5.png'
+        ]
+
+    },
+    {
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : true, 
+            // set true of false if options are images
+            imageOptions : true,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 0,
+            //set true/false if questions are in random order..
+            randomOptions : false,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : true
+
+        },
+        question : 'This is multi-select with image options?', 
+
+        //set options or image urls here..
+        options : [
+            'images/imageChoices/opt_img_1.png',
+            'images/imageChoices/opt_img_2.png',
+            'images/imageChoices/opt_img_3.png',
+            'images/imageChoices/opt_img_4.png',
+            'images/imageChoices/opt_img_5.png'
+        ]
+
+    },
+
+    {   
+        config : {
+            //set true or false if to add none-of-the-above option
+            withNoneOfTheAbove : false, 
+            // set true of false if options are images
+            imageOptions : false,
+            // 0 = grid style; 1 = vertical aligned..
+            optionsAlignment : 1,
+            //set true/false if questions are in random order..
+            randomOptions : true,
+            //set true if with 'submit' button; false if auto submit
+            withSubmitBtn : true,
+            //set true if multiselct; false if single select
+            multiselect : false
+
+        },
+        question : 'How likely are you to purchase Hennesy Gold?',
+
+        //set options or image urls here..
+        options : [
+            'Definitely will',
+            'Probably will',
+            'May or may not',
+            'Probably will not',
+            'Definitely will not'
+        ]
+        
     }
 ];
 
 // set "current web app" URL after the deploy
 var googleAppURL = 'https://script.google.com/macros/s/AKfycbxe5H2V6o6sTOMcFGYIMMNOidMGUcsTDlaloAQrYy6c2yhaJLn247PPpeFekYk-Zm7A/exec';
+
+//privary policy url..
+var clickTag = 'www.google.com';
 
 //set max width when resized..
 var maxW = 667;
@@ -51,15 +259,20 @@ var maxH = 1001;
 //set end image to show : 1-2
 var endImage = 1;
 
-//
+
+//-----------------------------------------
+//------end of configuration---------------
+//-----------------------------------------
+
+
+
 var responseData = [];
 
-//
-var currQuestionIndex = 0;
-
-//
 var expandedState = false;
 
+var currQuestionIndex = 0;
+
+var initialExpand = false;
 
 
 // window.onload = initAd;
@@ -68,25 +281,56 @@ window.onload = preloadImages;
 
 function preloadImages (){
 
-    var manifest = [ 'images/bg.png', 'images/submit.png' ];
+    var toPreload = [ 
+        'images/bg.png', 
+        'images/bg2.png', 
+        'images/bg3.png', 
+        'images/bg-bb.png',
+        'images/bg-bb2.png',
+        'images/bg-bb3.png',
+        'images/bg-col.png',
+        'images/bg-col2.png',
+        'images/bg-col3.png',
+        'images/cte.png',
+        'images/cte2.png',
+        'images/cte3.png',
+        'images/endscreen.png',
+        'images/endscreen2.png',
+        'images/endscreen-bb.png',
+        'images/endscreen2-bb.png',
+        'images/submit.png',  
+        'images/submit2.png', 
+        'images/submit3.png', 
+        'images/imageChoices/opt_img_1.png',
+        'images/imageChoices/opt_img_2.png',
+        'images/imageChoices/opt_img_3.png',
+        'images/imageChoices/opt_img_4.png',
+        'images/imageChoices/opt_img_5.png',
+        'images/imageChoices/noneoftheabove.png',
+    ];
 
     var images = [];
 
     var imageLoaded = 0, perc = 0;
 
-    for (var i in manifest ) {
+    for (var i in toPreload ) {
 
         images[i] = new Image();
-        images[i].src = manifest [i];
+        images[i].src = toPreload [i];
         images[i].onload = function () {
 
             imageLoaded ++;
 
-            perc = imageLoaded/manifest.length * 100;
+            perc = imageLoaded/toPreload.length * 100;
 
             document.querySelector('.pbar').style.width = perc +"%";
 
-            if ( perc >= 100 ) initAd();
+            if ( perc >= 100 ) {
+
+                document.querySelector('.pbar-cont').style.display = 'none';
+
+                initAd();
+            }
         }
 
     }
@@ -130,9 +374,9 @@ function resize () {
 
     //console.log ( fw, fh );
 
-    document.querySelector(".container").style.width = fw +"px";
+    document.querySelector(".universal-cont").style.width = fw +"px";
 
-    document.querySelector(".container").style.height = fh +"px";
+    document.querySelector(".universal-cont").style.height = fh +"px";
 
     //font adjustments 
     document.querySelector('.questions').style.fontSize = Math.floor(fh * 0.03 ) + 'px'
@@ -141,7 +385,7 @@ function resize () {
 function initAd () {
 
     //hide progress bar..
-    document.querySelector('.pbar-cont').style.display = 'none';
+    
     
     //show container
     document.querySelector('.container').style.display = 'block';
@@ -153,18 +397,18 @@ function initAd () {
 
         case 1:
 
-            document.querySelector('.universal-cont').style.display = 'block';
+            document.querySelector('.base').style.display = 'block';
 
             document.querySelector('.bg').classList.add ('bg-bb-' + theme);
 
-            initQuestions ( questions[ currQuestionIndex ] );
+            initQuestions ();
 
             break;
         case 2:
 
             resize();
 
-            document.querySelector('.universal-cont').style.display = 'block';
+            document.querySelector('.base').style.display = 'block';
 
             document.querySelector('.bg').classList.add ('bg-' + theme);
     
@@ -172,12 +416,10 @@ function initAd () {
 
             enableResponsive ();
 
-            initQuestions ( questions[ currQuestionIndex ] );
+            initQuestions  ();
 
             break;
         case 3:
-
-            
 
             showCollapse();
 
@@ -187,8 +429,6 @@ function initAd () {
 
 }
 
-
-
 function enableResponsive ( enabled = true ) {
 
     if ( enabled ) {
@@ -197,7 +437,6 @@ function enableResponsive ( enabled = true ) {
         window.removeEventListener ('resize', resize );
     }
 }
-
 
 function showCollapse () {
     
@@ -217,42 +456,53 @@ function showCollapse () {
 
 }
 
-function expandAd ( responsive = false ) {
+function expandAd () {
 
     expandedState = true;
 
-    document.querySelector('.container').style.width = '100%'; //responsive ? '100%' : '320px';
-    document.querySelector('.container').style.height = '100%'; //responsive ? '100%' : '480px';
+    document.querySelector('.container').style.width = isResponsive ? '100%' : '320px';
+    document.querySelector('.container').style.height = isResponsive ? '100%' : '480px';
 
-    resize();
+    document.querySelector('.base').style.display = 'block';
 
-    enableResponsive ();
+    if ( isResponsive ) {
 
-    document.querySelector('.universal-cont').style.display = 'block';
+        resize();
 
-    document.querySelector('.bg').classList.add ('bg-' + theme);
-    
-    addCloseBtn ();
+        enableResponsive ();
 
-    initQuestions ( questions[ currQuestionIndex ] );
+    }
+
+    if ( !initialExpand ) {
+
+        initialExpand = true;
+
+        document.querySelector('.bg').classList.add ('bg-' + theme);
+        
+        addCloseBtn ();
+
+        initQuestions ();
+
+    }
 
 }
 
 function collapseAd () {
 
+    console.log ('collapse')
     expandedState = false;
 
     document.querySelector('.container').style.width = '320px'
     document.querySelector('.container').style.height = '50px';
 
-    document.querySelector('.universal-cont').style.display = 'none';
+    document.querySelector('.base').style.display = 'none';
 
     enableResponsive ( false );
 }
 
 function closeInterstitial () {
     console.log ('close');
-    document.querySelector('.main').style.display = 'none';
+    document.querySelector('.container').style.display = 'none';
 }
 
 function addCloseBtn () {
@@ -287,67 +537,117 @@ function setContainerSize () {
     
 }
 
-function initQuestions ( obj, index = 0 ) 
+function generateRandomOrder ( length ) {
+
+    var arr = [];
+    for ( var i = 0; i < length; i++ ) {
+        arr.push ( i );
+    }
+    var tmp = [];
+    while ( arr.length > 0 ) {
+        
+        var randomIndx = Math.floor(Math.random() * arr.length);
+
+        tmp.push ( arr[randomIndx] );
+
+        arr.splice( randomIndx, 1);
+    }
+    return tmp;
+
+}
+
+function initQuestions ( index = 0 ) 
 {
-    console.log ('questions inited')
+    
+
+    var qData = questionsData[index];
 
     //create question main container
     var questCont = document.createElement('div');
     questCont.className = 'question-cont';
-    //questCont.style.fontSize = format > 2 ? '2.5vh' : '0.8rem';
-
+    
     //create question div
     var questDiv = document.createElement('div');
-    questDiv.className = 'question-div';
-    questDiv.innerText = obj.question;
 
-    
+    questDiv.classList.add ('question-div', format == 1 ? 'question-div-bb' : 'question-div-gen' ) 
+
+    questDiv.innerText = qData.question;
+
     //create options div
     var optionsDiv = document.createElement('div');
-    optionsDiv.className = 'options-div';
+
+    var addtlClass = 'options-div-' + (format==1 ? 'bb' : 'gen');
+    
+    addtlClass += ( !qData.config.withSubmitBtn ? '-nsb' : '');
+
+    optionsDiv.classList.add ('options-div', addtlClass ) 
 
     var optionsList = document.createElement('ul')
     optionsList.dataset.qindex = index;
 
+    var optionsClass = qData.config.optionsAlignment == 0 ? 'g-align' : 'v-align';
 
-    var optionsClass = optionsStyle == 0 ? 'g-align' : 'v-align';
+    var randomOrder = qData.config.randomOptions ? generateRandomOrder(qData.options.length) : 0;
 
-    for ( var i in obj.options ) {
+    for ( var i in qData.options ) {
 
+        //
+        var order = qData.config.randomOptions ? randomOrder[i] : i;
+
+        //
         var options = document.createElement ('li');
         
         options.className = optionsClass;
 
-        options.innerText = obj.options [i];
+        options.dataset.id = order;
 
+        //
+        var optContent = '';
+
+        if ( qData.config.imageOptions ) {
+            optContent = '<div class="img-cont"><img src="' + qData.options [order] + '" alt="imageOption'+order+'" class="img"></div>';
+        }else {
+            optContent = '<div class="opt-cont">'+ qData.options [order] +'</div>'
+        }
+
+        options.innerHTML = optContent;
+        
         options.addEventListener ('click', function () {
 
-            if ( !multiselect ) resetOptions();
+            if ( !qData.config.multiselect ) resetOptions();
             
             resetNoneOption () 
 
-            this.classList.toggle ('active');
+            this.classList.toggle ('selected');
 
-            if ( !withButton ) submitAnswer ();
+            if ( !qData.config.withSubmitBtn ) submitAnswer ();
 
         });
 
         optionsList.append( options );
     }
 
-    if ( multiselect && noneoftheaboveoption ) {
+    if ( qData.config.multiselect && qData.config.withNoneOfTheAbove ) {
 
         var none = document.createElement ('li');
         
         none.className = optionsClass;
+        
+        none.dataset.id = 'none';
 
-        none.innerText = 'None of the above'
+        var noneCont = "";
+        if ( !qData.config.imageOptions ) {
+            noneCont = '<div class="opt-cont">None of the above</div>';
+        }else {
+            noneCont = '<div class="img-cont"><img src="images/imageChoices/noneoftheabove.png" alt="noneoftheabove" class="img"></div>';
+        }
+        none.innerHTML = noneCont;
 
         none.addEventListener('click', function () {
 
             resetOptions ();
 
-            this.classList.toggle ('active')
+            this.classList.toggle ('selected')
 
         });
 
@@ -363,26 +663,17 @@ function initQuestions ( obj, index = 0 )
 
 
     //create button if required..
-    withButton = multiselect ?  true : withButton;
+    var withButton = qData.config.multiselect ?  true : qData.config.withSubmitBtn;
 
     if ( withButton ) {
 
         //create btn div
         var btnDiv = document.createElement('div');
-        btnDiv.classList.add ('btn-div');
-        btnDiv.classList.add ('btn-submit-' + theme);
+        btnDiv.classList.add ('btn-div', 'btn-div-' + ( format == 1 ? 'bb' : 'gen')  , 'btn-submit-' + theme, );
         
         btnDiv.addEventListener ('click', function () {
             submitAnswer ();
         });
-
-        //create button element
-        // var btn = document.createElement('button');
-        // btn.innerText = 'Submit';
-
-        // 
-        
-        // btnDiv.append ( btn );
 
         questCont.append ( btnDiv );
 
@@ -394,11 +685,13 @@ function initQuestions ( obj, index = 0 )
 
 function resetNoneOption ()
 {
-    if ( multiselect && noneoftheaboveoption ) {
+    var qData = questionsData [currQuestionIndex ];
+
+    if ( qData.config.multiselect && qData.config.withNoneOfTheAbove ) {
 
         var opts = document.querySelectorAll('ul[data-qindex="'+ currQuestionIndex +'"] li');
 
-        opts [ opts.length - 1 ].classList.toggle ('active', false);
+        opts [ opts.length - 1 ].classList.toggle ('selected', false);
 
     }
 
@@ -409,58 +702,84 @@ function resetOptions () {
     var options = document.querySelectorAll ('.options-div ul li');
 
     options.forEach ( ( opt, index ) => {
-        opt.classList.remove('active');
+        opt.classList.remove('selected');
     })
 
 }
 
 function submitAnswer () {
 
-    console.log ( 'answer submitted');
 
-    var options = document.querySelectorAll ('.options-div ul li.active');
+    var selected = document.querySelectorAll ('ul[data-qindex="'+ currQuestionIndex +'"] li.selected');
 
-    if ( options.length > 0 ) {
+    //console.log ( selected.length );
 
-        //gather answer..
+    if ( selected.length > 0 ) {
+
+        // //gather answer..
 
         var tempStringArr = [];
 
-        options.forEach ( (option, i) => {
-            tempStringArr.push ( option.innerText );
+        selected.forEach ( ( el, i) => {
+
+            var elementsId = el.getAttribute('data-id');
+
+            if (  elementsId != 'none' ) {
+                
+                tempStringArr.push ( questionsData[currQuestionIndex].options[ elementsId ] );
+
+            }else {
+                
+                tempStringArr.push ( 'noneoftheabove' );
+            }
+
         });
 
-        responseData.push ( tempStringArr.toString() );
+        console.log ( tempStringArr.toString()  );
+
+        responseData.push ( {
+            question : questionsData[currQuestionIndex].question,
+            response : tempStringArr.toString()
+        } );
+
+        //..
 
         var questNodes = document.querySelectorAll('.question-cont');
 
         var currQuestion = questNodes [ currQuestionIndex ];
 
-        currQuestion.style.display = 'none';
+        currQuestion.style.transform = 'translateX(-200%)';
 
         currQuestionIndex ++;
+        
+        setTimeout ( ()=> {
 
-        console.log ( currQuestionIndex , questions.length  );
+            if ( currQuestionIndex == questionsData.length ) {
 
-        if ( currQuestionIndex == questions.length ) {
-
-            showEndScreen ();
-
-            //submitToGoogle();
-
-        }else {
-            initQuestions ( questions[currQuestionIndex], currQuestionIndex );
-        }
-
+                showEndScreen ();
+    
+                //submitToGoogle();
+    
+            }else {
+    
+                initQuestions ( currQuestionIndex );
+            }
+    
+        }, 300)
+        
     }
 
 }
 
 function showEndScreen () {
 
-    document.querySelector('.end-img').classList.add ('end-img-' + endImage );
+    var endstr = format == 1 ? 'end-img-bb-' + endImage : 'end-img-' + endImage;
+
+    document.querySelector('.end-img').classList.add ( endstr );
 
     document.getElementById('end').style.display = 'block';
+
+    console.log (responseData);
     
 }
 
@@ -478,9 +797,9 @@ function submitToGoogle () {
 
     formData.append('Timestamp', new Date().toLocaleString());
     formData.append('DeviceID', MediaDeviceInfo.deviceId || 'undefined');
-    formData.append('Response', responseData[0]);
+    formData.append('Response', responseData[currQuestionIndex].response );
     formData.append('Group', 'undefined');
-    formData.append('QuestionID', 1 );
+    formData.append('QuestionID', currQuestionIndex );
     formData.append('Sheetname', 'interstitial');
 
     // define what happens on successful form data submission
