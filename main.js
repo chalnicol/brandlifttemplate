@@ -1,8 +1,8 @@
 
 
-//-----------------------------------------
-//------start of configuration-------------
-//-----------------------------------------
+//-----------------------------------------//
+//------start of configuration-------------//
+//-----------------------------------------//
 
 //set format 1 = big box; 2 = Interstitial Responsive; 3 = click-to-expand; 
 var format = 2; 
@@ -14,7 +14,7 @@ var isResponsive = false;
 var theme = 3;
 
 //set banner text. for cte format only.. 
-var bannerText = "Which brands are you familiar with?";
+var bannerText = "How likely are you to participate in this survey?";
 
 //set expand banner dimensions, for cte only and not responsive 
 var expandDimensions = { width : 340,  height : 480 }; 
@@ -33,7 +33,7 @@ var questionsData = [
             //set true/false if questions are in random order..
             randomOptions : true,
             //set true if with 'submit' button; false if auto submit
-            withSubmitBtn : false,
+            withSubmitBtn : true,
             //set true if multiselct; false if single select
             multiselect : false
 
@@ -213,7 +213,6 @@ var questionsData = [
         ]
 
     },
-
     {   
         config : {
             //set true or false if to add none-of-the-above option
@@ -260,9 +259,9 @@ var maxH = 1001;
 var endImage = 1;
 
 
-//-----------------------------------------
-//------end of configuration---------------
-//-----------------------------------------
+//-----------------------------------------//
+//------end of configuration---------------//
+//-----------------------------------------//
 
 
 
@@ -337,7 +336,7 @@ function preloadImages (){
     
 }
 
-function resize () {
+function resize ( container ) {
 
    
     console.log ('resize container..');
@@ -368,18 +367,21 @@ function resize () {
 
             fw = ( w > maxW ) ? maxW : w;
             fh = 3/2*fw;;
+
         }
     
     }
 
-    //console.log ( fw, fh );
+    container.style.width = fw +"px";
 
-    document.querySelector(".universal-cont").style.width = fw +"px";
+    container.style.height = fh +"px";
 
-    document.querySelector(".universal-cont").style.height = fh +"px";
+}
 
-    //font adjustments 
-    document.querySelector('.questions').style.fontSize = Math.floor(fh * 0.03 ) + 'px'
+function getFont () {
+
+   // document.querySelector('.questions').style.fontSize = Math.floor(fh * 0.03 ) + 'px'
+
 }
 
 function initAd () {
@@ -681,6 +683,8 @@ function initQuestions ( index = 0 )
 
     document.querySelector('.questions').appendChild (questCont);
 
+   
+
 }
 
 function resetNoneOption ()
@@ -748,7 +752,7 @@ function submitAnswer () {
 
         var currQuestion = questNodes [ currQuestionIndex ];
 
-        currQuestion.style.transform = 'translateX(-200%)';
+        currQuestion.style.transform = 'perspective(500px) rotateY(-180deg)';
 
         currQuestionIndex ++;
         
